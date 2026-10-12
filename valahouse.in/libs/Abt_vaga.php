@@ -1,0 +1,49 @@
+<?php       
+
+    class Abt_vaga extends MySql{
+    
+    
+    
+    function deleteList($list){
+                    for($i=0;$i<count($list);$i++){
+                            $this->delete('testimonials','`t_id`='.$list[$i]);
+                    }
+            }   
+            
+            
+    
+    
+    /*
+             * Edit Testimonials
+            */          
+        function editAbt_vaga($inputs){
+        $insert =   array('av_title'=>$this->addFilter($this->escapeHtml($inputs['title'])),
+                                        'av_dscrpn'=>$inputs['dscrptn'],
+                                        'av_stus'=>$inputs['status']
+                                        
+                                        
+                                        
+                            );
+                            //print_r($insert); exit;   
+                $this->update($insert,"abt_vgmn",'`av_id`='.$inputs['id']);       
+                return true;
+            }
+    
+
+
+    function getAbt_vaga(){
+        $query  =   "SELECT * FROM `abt_vgmn`";
+
+        $rec        =   $this->fetchAll($query);
+        return $rec;
+    }
+
+    function getAllAbt_vagaDetails()
+    {
+        $query = "SELECT * FROM abt_vgmn where av_stus=1";
+        $rec = $this->fetchAll($query);
+        return $rec;    
+    }
+    
+}
+?>
